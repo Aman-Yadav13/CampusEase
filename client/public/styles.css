@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins light 300", sans-serif;
+}
+
+body {
+  background: rgb(4, 1, 42);
+  background: linear-gradient(
+    90deg,
+    rgba(4, 1, 42, 1) 0%,
+    rgba(6, 6, 49, 1) 25%,
+    rgba(11, 101, 119, 1) 100%
+  );
+}
