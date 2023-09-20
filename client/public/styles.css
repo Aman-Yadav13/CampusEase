@@ -6,6 +6,7 @@
 }
 
 body {
+  overflow: hidden;
   background: rgb(4, 1, 42);
   background: linear-gradient(
     90deg,

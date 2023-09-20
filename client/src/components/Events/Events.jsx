@@ -7,6 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import {
   Box,
+  Grid,
   List,
   ListItem,
   ListItemText,
@@ -55,7 +56,7 @@ const CalendarPage = () => {
         justifyContent="space-between"
       >
         <Box
-          flex="1 1 40%"
+          flex="30%"
           backgroundColor={colors.primary[400]}
           p="15px"
           borderRadius="4px"
@@ -63,35 +64,40 @@ const CalendarPage = () => {
           <Typography variant="h4" color={colors.blueAccent[100]}>
             Events
           </Typography>
-          <List gap="2px">
-            {currentEvents.map((event) => (
-              <ListItem
-                key={event.id}
-                sx={{
-                  backgroundColor: colors.greenAccent[600],
-                  margin: "10px 0",
-                  borderRadius: "2px",
-                }}
-              >
-                <ListItemText
-                  primary={event.title}
-                  secondary={
-                    <Typography>
-                      {formatDate(event.start, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-            ))}
+
+          <List>
+            <Grid container spacing={2}>
+              {currentEvents.map((event) => (
+                <Grid item xs={6}>
+                  <ListItem
+                    key={event.id}
+                    sx={{
+                      backgroundColor: colors.greenAccent[600],
+                      margin: "10px 0",
+                      borderRadius: "2px",
+                    }}
+                  >
+                    <ListItemText
+                      primary={event.title}
+                      secondary={
+                        <Typography>
+                          {formatDate(event.start, {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                </Grid>
+              ))}
+            </Grid>
           </List>
         </Box>
 
         {/* CALENDAR */}
-        <Box flex="1 1 100%" ml="15px" mr="15px">
+        <Box flex="70%" ml="15px" mr="15px">
           <FullCalendar
             height="75vh"
             plugins={[

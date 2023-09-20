@@ -1,10 +1,18 @@
 import styled from "styled-components";
-import { Button } from "./Button";
+import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
+import "./styles.css";
+import Laptop from "../../images/laptop.jpg";
+import Phone from "../../images/phone.jpg";
+import Bucket from "../../images/bucket.jpg";
+import Earphones from "../../images/earphones.jpg";
+import Mattrice from "../../images/mattrice.jpg";
+import Headphones from "../../images/headphones.jpg";
+
 const Tru = () => {
   return (
-    <Wrapper>
-      <h2>
+    <>
+      <h2 className="heading2">
         <p className="h">If u wanna sell your belongings here you go!</p>
       </h2>
 
@@ -15,7 +23,7 @@ const Tru = () => {
       </div>
       <div class="procontainer">
         <div class="p">
-          <img src="images/c1.jpg" alt="prod1"></img>
+          <img src={Laptop} alt="prod1"></img>
           <div class="des">
             <span>DELL</span>
             <h5>Laptop</h5>
@@ -23,7 +31,7 @@ const Tru = () => {
           </div>
         </div>
         <div class="p">
-          <img src="images/r2.jpeg" alt="prod1"></img>
+          <img src={Bucket} alt="prod1"></img>
           <div class="des">
             <span>Adidas</span>
             <h5>Bucket</h5>
@@ -31,7 +39,7 @@ const Tru = () => {
           </div>
         </div>
         <div class="p">
-          <img src="images/r2.jpeg" alt="prod1"></img>
+          <img src={Mattrice} alt="prod1"></img>
           <div class="des">
             <span>Adidas</span>
             <h5>MATTRESS</h5>
@@ -39,7 +47,7 @@ const Tru = () => {
           </div>
         </div>
         <div class="p">
-          <img src="images/r2.jpeg" alt="prod1"></img>
+          <img src={Earphones} alt="prod1"></img>
           <div class="des">
             <span>JBl</span>
             <h5>Earphones</h5>
@@ -47,7 +55,7 @@ const Tru = () => {
           </div>
         </div>
         <div class="p">
-          <img src="images/r2.jpeg" alt="prod1"></img>
+          <img src={Headphones} alt="prod1"></img>
           <div class="des">
             <span>Boat</span>
             <h5>Headphones</h5>
@@ -55,57 +63,15 @@ const Tru = () => {
           </div>
         </div>
         <div class="p">
-          <img src="images/r2.jpeg" alt="prod1"></img>
+          <img src={Phone} alt="prod1"></img>
           <div class="des">
             <span>Real ME</span>
             <h5>15gb</h5>
-            <h4>20000</h4>
+            <h4>20007</h4>
           </div>
         </div>
       </div>
-    </Wrapper>
+    </>
   );
 };
-const Wrapper = styled.section`
- img {
-     width: 30rem;
-     height:30rem;
-     border-radius:20px;
-   }
-   .procontainer{
-     justify-content:space-between;
-     display:flex;
-     padding-top:10px;
-     flex-wrap:wrap;
-     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
- }
- .pro{
-     text-align:center;
- }
- h4{
-   color:blue;
- }
- h5{
-   font-weight:700;
-   color:black;
- }
- .h{
-  padding:34px 34px;
-  font-weight:600px;
-  margin:15px 200px;
- .p{
-     width=23%;
-     min-width:250px;
-     padding:20px 42px;
-     border: 2px solid #cce7d0;
-     border-radius:25px;
-     cursor:pointer;
-     margin:15px 8px;
-     transition:0.2s ease;
-     position:relative;
-     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
- 
- }
- 
-   `;
 export default Tru;
