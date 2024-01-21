@@ -44,7 +44,7 @@ const StyledTableRow = styled(TableRow)(({ colors }) => ({
   },
 }));
 
-const LostFound = ({ socket }) => {
+const LostFound = () => {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const history = useNavigate();

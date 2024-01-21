@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Chat from "./Chat/Chat";
 import {
   Box,
   TextField,
