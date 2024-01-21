@@ -19,6 +19,7 @@ import { tokens } from "../../theme";
 import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { createItem, getItems, searchItems } from "../../actions/items";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ colors }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,13 +44,13 @@ const StyledTableRow = styled(TableRow)(({ colors }) => ({
   },
 }));
 
-const LostFound = () => {
+const LostFound = ({ socket }) => {
   const classes = useStyles();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const history = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
   const { items } = useSelector((state) => state.items);
-
-  // const { searchItemss } = useSelector((state) => state.searchItemss);
 
   const colors = tokens(theme.palette.mode);
   const [searchFilter, setSearchFilter] = useState("");
@@ -63,10 +64,15 @@ const LostFound = () => {
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createItem({ ...itemData }));
-    clear();
-    window.location.reload();
+    if (user?.result) {
+      e.preventDefault();
+      dispatch(createItem({ ...itemData }));
+      clear();
+      window.location.reload();
+    } else {
+      window.alert("You must Sign In to enter a item you found.");
+      clear();
+    }
   };
   const searchSubmit = () => {
     setSearchItems(items.filter((item) => item.item === searchFilter));
@@ -83,9 +89,9 @@ const LostFound = () => {
     });
   };
   return (
-    <Box sx={{ marginLeft: "40px", marginTop: "120px" }}>
+    <Box sx={{ marginLeft: "80px", marginTop: "120px" }}>
       <Grid container spacing={3}>
-        <Grid item md={8}>
+        <Grid item md={7}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
@@ -93,11 +99,6 @@ const LostFound = () => {
                   <StyledTableCell colors={colors}>
                     <Typography variant="h5" color={colors.primary[100]}>
                       Item&nbsp;Name
-                    </Typography>
-                  </StyledTableCell>
-                  <StyledTableCell colors={colors} align="right">
-                    <Typography variant="h5" color={colors.primary[100]}>
-                      Specification
                     </Typography>
                   </StyledTableCell>
                   <StyledTableCell colors={colors} align="right">
@@ -112,7 +113,7 @@ const LostFound = () => {
                   </StyledTableCell>
                   <StyledTableCell colors={colors} align="right">
                     <Typography variant="h5" color={colors.primary[100]}>
-                      Contact
+                      Connect
                     </Typography>
                   </StyledTableCell>
                 </TableRow>
@@ -130,16 +131,29 @@ const LostFound = () => {
                           {item?.item}
                         </StyledTableCell>
                         <StyledTableCell colors={colors} align="right">
-                          {item?.specification}
-                        </StyledTableCell>
-                        <StyledTableCell colors={colors} align="right">
                           {item?.placeFound}
                         </StyledTableCell>
                         <StyledTableCell colors={colors} align="right">
                           {item?.name}
                         </StyledTableCell>
                         <StyledTableCell colors={colors} align="right">
-                          {item?.contact}
+                          <Button
+                            className={classes.buttonSubmit}
+                            sx={{
+                              marginBottom: 1,
+                              color: `${colors.primary[100]}`,
+                            }}
+                            variant="contained"
+                            size="small"
+                            color="primary"
+                            type="submit"
+                            onClick={() => {
+                              history("/chat");
+                              window.location.reload();
+                            }}
+                          >
+                            Connect
+                          </Button>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -155,9 +169,7 @@ const LostFound = () => {
                         >
                           {item?.item}
                         </StyledTableCell>
-                        <StyledTableCell colors={colors} align="right">
-                          {item?.specification}
-                        </StyledTableCell>
+
                         <StyledTableCell colors={colors} align="right">
                           {item?.placeFound}
                         </StyledTableCell>
@@ -165,7 +177,23 @@ const LostFound = () => {
                           {item?.name}
                         </StyledTableCell>
                         <StyledTableCell colors={colors} align="right">
-                          {item?.contact}
+                          <Button
+                            className={classes.buttonSubmit}
+                            sx={{
+                              marginBottom: 1,
+                              color: `${colors.primary[100]}`,
+                            }}
+                            variant="contained"
+                            size="small"
+                            color="primary"
+                            type="submit"
+                            onClick={() => {
+                              history("/chat");
+                              window.location.reload();
+                            }}
+                          >
+                            Connect
+                          </Button>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -175,7 +203,7 @@ const LostFound = () => {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={4}>
           <Paper className={classes.paper} elevation={6}>
             <form
               autoComplete="off"

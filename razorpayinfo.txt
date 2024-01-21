@@ -1,0 +1,2 @@
+key id = rzp_test_OHdRvEkwewpKLy
+key secret = w9yZPBH1fg8Ul8OXErPTmGJj

@@ -18,6 +18,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.2",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "razorpay": "^2.9.2",
+    "react-razorpay": "^2.0.1",
+    "socket.io": "^4.7.2",
+    "stripe": "^13.9.0",
+    "uuid": "^9.0.1"
   }
 }

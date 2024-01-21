@@ -6,7 +6,6 @@
 }
 
 body {
-  overflow: hidden;
   background: rgb(4, 1, 42);
   background: linear-gradient(
     90deg,
@@ -14,4 +13,10 @@ body {
     rgba(6, 6, 49, 1) 25%,
     rgba(11, 101, 119, 1) 100%
   );
+}
+
+.styles_scrollable-div__prScv {
+  max-height: calc(100% -2px) !important;
+  height: calc(100% -2px) !important;
+  overflow-y: auto;
 }

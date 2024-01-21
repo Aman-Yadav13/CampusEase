@@ -61,7 +61,11 @@ const CalendarPage = () => {
           p="15px"
           borderRadius="4px"
         >
-          <Typography variant="h4" color={colors.blueAccent[100]}>
+          <Typography
+            sx={{ textAlign: "center" }}
+            variant="h4"
+            color={colors.greenAccent[600]}
+          >
             Events
           </Typography>
 

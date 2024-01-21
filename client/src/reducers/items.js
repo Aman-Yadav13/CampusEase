@@ -1,6 +1,6 @@
 import { FETCH_ALL, CREATE, SEARCH_ITEM } from "../constants/actionTypes";
 
-export default (state = { items: [] }, action) => {
+const items = (state = { items: [] }, action) => {
   switch (action.type) {
     case FETCH_ALL:
       return { ...state, items: action.payload };
@@ -11,3 +11,5 @@ export default (state = { items: [] }, action) => {
       return state;
   }
 };
+
+export default items;

@@ -6,9 +6,9 @@ import {
   Grid,
   Container,
   Typography,
+  useTheme,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { GoogleLogin } from "@react-oauth/google";
 import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
@@ -16,7 +16,7 @@ import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signin, signup } from "../../actions/auth";
-
+import { tokens } from "../../theme";
 const initialState = {
   firstName: "",
   lastName: "",
@@ -33,20 +33,26 @@ const Auth = ({ isAuthPage, setIsAuthPage }) => {
   const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const isVITMail = true;
 
   useEffect(() => {
     setIsAuthPage((prevIsAuthPage) => !prevIsAuthPage);
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isSignUp) {
+    if (isSignUp && formData.email.includes("vitstudent.ac.in")) {
       dispatch(signup(formData, history));
-    } else {
+      setIsAuthPage(false);
+      history("/");
+    } else if (formData.email.includes("vitstudent.ac.in")) {
       dispatch(signin(formData, history));
+      setIsAuthPage(false);
+      history("/");
+    } else {
+      window.alert(
+        "You can only login through specific domain (vitstudent.ac.in)"
+      );
     }
-    setIsAuthPage(false);
-    history("/");
   };
 
   const handleChange = (e) => {
@@ -58,23 +64,6 @@ const Auth = ({ isAuthPage, setIsAuthPage }) => {
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
     setShowPassword(false);
-  };
-
-  const googleSuccess = async (res) => {
-    const token = res?.credential;
-    const result = jwt_decode(res?.credential);
-
-    try {
-      dispatch({ type: "AUTH", data: { result, token } });
-
-      history("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const googleError = () => {
-    console.log("Google Sign In was unsuccessful . Try Again Later");
   };
 
   return (
@@ -125,6 +114,16 @@ const Auth = ({ isAuthPage, setIsAuthPage }) => {
                 type="password"
               />
             )}
+            {isSignUp && (
+              <>
+                <Input
+                  name="contact"
+                  label="Contact Information"
+                  handleChange={handleChange}
+                  type="text"
+                />
+              </>
+            )}
           </Grid>
           <Button
             type="submit"
@@ -136,11 +135,6 @@ const Auth = ({ isAuthPage, setIsAuthPage }) => {
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
 
-          <GoogleLogin
-            onSuccess={googleSuccess}
-            onError={googleError}
-            cookiePolicy="single_host_origin"
-          />
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>

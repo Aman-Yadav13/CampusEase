@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { bgscript } from "./index";
 import "./styles.css";
-import { useTheme, Typography } from "@mui/material";
+import { useTheme, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { tokens } from "../../theme";
@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
+import symboll from "../../images/symboll.png";
 
 // import useStyles from "./styles";
 
@@ -56,6 +57,19 @@ const Background = ({ isAuthPage, setIsAuthPage }) => {
   return (
     <div id="large-header" className="large-header">
       <canvas id="demo-canvas"></canvas>
+      <Box marginTop="300px" display="flex" flexDirection="column">
+        <p className="slogan">
+          WHERE
+          <br />
+          CAMPUS
+          <br />
+          MEETS
+          <br />
+          CONVENIENCE
+          <br />
+        </p>
+        <img className="symbol" src={symboll} alt="icon" />
+      </Box>
       {user ? (
         <CustomisedButton
           sx={{
